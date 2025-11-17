@@ -43,4 +43,14 @@ public class ProductService {
     public void deleteProduct(Integer id) {
         productRepository.deleteById(id);
     }
+
+    //search method
+    public List<Product> search(String name, String category, Double minPrice, Double maxPrice) {
+        return productRepository.searchProducts(name, category, minPrice, maxPrice);
+    }
+
+    //product detail method
+    public Product getProductDetail(int id) {
+        return productRepository.findProductDetail(id);
+    }
 }
