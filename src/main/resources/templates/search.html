@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zelora Product Search</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery (required by DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+</head>
+<body>
+
+<h1>Zelora Product Search</h1>
+
+<!-- SEARCH FORM -->
+<form method="get" action="/search/results" class="search-form">
+
+    <label for="name">Product Name (partial allowed):</label>
+    <input type="text" id="name" name="name" placeholder="e.g. Jacket">
+
+    <label for="category">Category:</label>
+    <input type="text" id="category" name="category" placeholder="e.g. Shoes">
+
+    <label for="minPrice">Min Price (€):</label>
+    <input type="number" step="0.01" id="minPrice" name="minPrice">
+
+    <label for="maxPrice">Max Price (€):</label>
+    <input type="number" step="0.01" id="maxPrice" name="maxPrice">
+
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<!-- RESULTS -->
+<h2>Search Results</h2>
+
+<table id="resultsTable" class="display" style="width:100%">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Price (€)</th>
+        <th>Release Date</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!-- Render when product list exists -->
+    <tr th:each="p : ${products}">
+        <td>
+            <a th:href="@{|/search/product/${p.productId}|}"
+               th:text="${p.productName}"></a>
+        </td>
+        <td th:text="${p.categoryId.categoryName}"></td>
+        <td th:text="${p.price}"></td>
+        <td th:text="${#dates.format(p.releaseDate, 'yyyy-MM-dd')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Activate DataTables -->
+<script>
+    $(document).ready(function() {
+        $('#resultsTable').DataTable({
+            "pageLength": 10
+        });
+    });
+</script>
+
+</body>
+</html>
