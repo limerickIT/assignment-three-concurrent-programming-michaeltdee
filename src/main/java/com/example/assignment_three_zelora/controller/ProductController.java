@@ -20,8 +20,13 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public String searchForm() {
-        return "search"; // show the search page
+    public String searchForm(Model model) {
+
+        // Load ALL products on first page load
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+
+        return "search";
     }
 
     @GetMapping("/results")
