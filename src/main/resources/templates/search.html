@@ -36,6 +36,14 @@
     <label for="maxPrice">Max Price (€):</label>
     <input type="number" step="0.01" id="maxPrice" name="maxPrice">
 
+    <label>Keyword (in description):</label>
+    <input type="text" name="keyword" placeholder="e.g. recycled, waterproof">
+
+    <label>
+        <input type="checkbox" name="recent"> Show only recent products (last 7 days)
+    </label>
+
+
     <button type="submit">Search</button>
 </form>
 
@@ -51,6 +59,7 @@
         <th>Category</th>
         <th>Price (€)</th>
         <th>Release Date</th>
+        <th>Discounted Price</th>
     </tr>
     </thead>
 
@@ -64,6 +73,7 @@
         <td th:text="${p.categoryId.categoryName}"></td>
         <td th:text="${p.price}"></td>
         <td th:text="${#dates.format(p.releaseDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${p.discountedPrice != null ? p.discountedPrice : p.price}"></td>
     </tr>
     </tbody>
 </table>

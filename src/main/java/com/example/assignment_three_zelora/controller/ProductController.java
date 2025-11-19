@@ -35,13 +35,24 @@ public class ProductController {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) Double minPrice,
             @RequestParam(required = false) Double maxPrice,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Boolean recent,
             Model model) {
 
-        List<Product> products = productService.search(name, category, minPrice, maxPrice);
+        List<Product> products = productService.search(
+                name,
+                category,
+                minPrice,
+                maxPrice,
+                keyword,
+                recent
+        );
+
         model.addAttribute("products", products);
 
         return "search";
     }
+
 
     @GetMapping("/product/{id}")
     public String viewProduct(@PathVariable int id, Model model) {

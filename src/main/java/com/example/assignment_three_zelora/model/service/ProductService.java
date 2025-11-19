@@ -4,6 +4,8 @@ import com.example.assignment_three_zelora.model.entitys.Product;
 import com.example.assignment_three_zelora.model.repos.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,12 +47,63 @@ public class ProductService {
     }
 
     //search method
-    public List<Product> search(String name, String category, Double minPrice, Double maxPrice) {
-        return productRepository.searchProducts(name, category, minPrice, maxPrice);
+    public List<Product> searchProducts(String name,
+                                        String category,
+                                        Double minPrice,
+                                        Double maxPrice,
+                                        String keyword,
+                                        Boolean recent) {
+
+        Date recentDate = null;
+
+        if (Boolean.TRUE.equals(recent)) {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_YEAR, -7);
+            recentDate = cal.getTime();
+        }
+
+        return productRepository.searchProducts(
+                name,
+                category,
+                minPrice,
+                maxPrice,
+                keyword,
+                recent,
+                recentDate
+        );
     }
+
 
     //product detail method
     public Product getProductDetail(int id) {
         return productRepository.findProductDetail(id);
     }
+
+
+    public List<Product> search(String name,
+                                String category,
+                                Double minPrice,
+                                Double maxPrice,
+                                String keyword,
+                                Boolean recent) {
+
+        Date recentDate = null;
+
+        if (Boolean.TRUE.equals(recent)) {
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DAY_OF_YEAR, -7);
+            recentDate = cal.getTime();
+        }
+
+        return productRepository.searchProducts(
+                name,
+                category,
+                minPrice,
+                maxPrice,
+                keyword,
+                recent,
+                recentDate
+        );
+    }
+
 }

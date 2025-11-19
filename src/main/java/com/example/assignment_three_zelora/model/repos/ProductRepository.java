@@ -11,14 +11,26 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("""
-        SELECT p FROM Product p
-        JOIN p.categoryId c
-        WHERE (:name IS NULL OR LOWER(p.productName) LIKE LOWER(CONCAT('%', :name, '%')))
-        AND (:category IS NULL OR LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :category, '%')))
-        AND (:minPrice IS NULL OR p.price >= :minPrice)
-        AND (:maxPrice IS NULL OR p.price <= :maxPrice)
-        """)
-    List<Product> searchProducts(String name, String category, Double minPrice, Double maxPrice);
+    SELECT p FROM Product p
+    JOIN p.categoryId c
+    WHERE (:name IS NULL OR LOWER(p.productName) LIKE LOWER(CONCAT('%', :name, '%')))
+      AND (:category IS NULL OR LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :category, '%')))
+      AND (:minPrice IS NULL OR p.price >= :minPrice)
+      AND (:maxPrice IS NULL OR p.price <= :maxPrice)
+      AND (:keyword IS NULL OR CAST(p.description AS string) LIKE CONCAT('%', :keyword, '%'))
+      AND (:recent IS NULL OR p.releaseDate >= :recentDate)
+""")
+    List<Product> searchProducts(
+            String name,
+            String category,
+            Double minPrice,
+            Double maxPrice,
+            String keyword,
+            Boolean recent,
+            java.util.Date recentDate
+    );
+
+
 
 
     @Query("""
