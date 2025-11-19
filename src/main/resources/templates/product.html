@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${product.productName}">Product Details</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<a href="/search">⬅ Back to Search</a>
+
+<h1 th:text="${product.productName}"></h1>
+
+<div class="product-container">
+
+    <!-- LEFT SIDE: IMAGE -->
+    <div class="product-image">
+        <img th:src="@{'/images/' + ${product.featureImage}}"
+             alt="Product Image"
+             style="max-width:300px;">
+    </div>
+
+    <!-- RIGHT SIDE: INFO -->
+    <div class="product-info">
+
+        <p><strong>Category:</strong>
+            <span th:text="${product.categoryId.categoryName}"></span>
+        </p>
+
+        <p><strong>Description:</strong>
+            <span th:text="${product.description}"></span>
+        </p>
+
+        <p><strong>Price:</strong>
+            €<span th:text="${product.price}"></span>
+        </p>
+
+        <p th:if="${product.discountedPrice != null}">
+            <strong>Discounted Price:</strong>
+            €<span th:text="${product.discountedPrice}"></span>
+        </p>
+
+        <p><strong>Size:</strong> <span th:text="${product.size}"></span></p>
+        <p><strong>Colour:</strong> <span th:text="${product.colour}"></span></p>
+        <p><strong>Material:</strong> <span th:text="${product.material}"></span></p>
+        <p><strong>Sustainability Rating:</strong>
+            <span th:text="${product.sustainabilityRating}"></span>/5
+        </p>
+
+        <p><strong>Manufacturer:</strong>
+            <span th:text="${product.manufacturer}"></span>
+        </p>
+
+        <p><strong>Release Date:</strong>
+            <span th:text="${#dates.format(product.releaseDate, 'yyyy-MM-dd')}"></span>
+        </p>
+
+        <p><strong>Supplier:</strong>
+            <span th:text="${product.supplierId.supplierName}"></span>
+        </p>
+
+    </div>
+</div>
+
+<hr>
+
+<!-- REVIEWS -->
+<h2>Customer Reviews</h2>
+
+<div th:if="${product.reviewList.size() == 0}">
+    <p>No reviews yet.</p>
+</div>
+
+<ul th:each="r : ${product.reviewList}">
+    <li>
+        <strong th:text="${r.rating}"></strong>/5 —
+        <span th:text="${r.reviewText}"></span>
+    </li>
+</ul>
+
+<hr>
+
+<!-- INVENTORY SECTION -->
+<h2>Inventory</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Inventory ID</th>
+        <th>In Stock</th>
+        <th>Reserved</th>
+        <th>Reorder Point</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="i : ${product.inventoryList}">
+        <td th:text="${i.inventoryId}"></td>
+        <td th:text="${i.quantityInStock}"></td>
+        <td th:text="${i.quantityReserved}"></td>
+        <td th:text="${i.reorderPoint}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

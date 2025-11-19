@@ -34,11 +34,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
 
     @Query("""
-        SELECT p FROM Product p
-        LEFT JOIN FETCH p.categoryId
-        LEFT JOIN FETCH p.reviewList
-        LEFT JOIN FETCH p.inventoryList
-        WHERE p.productId = :id
-        """)
+    SELECT p FROM Product p
+    LEFT JOIN FETCH p.categoryId
+    WHERE p.productId = :id
+""")
     Product findProductDetail(int id);
 }
