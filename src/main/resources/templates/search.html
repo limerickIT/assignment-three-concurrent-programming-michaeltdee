@@ -46,6 +46,7 @@
 <table id="resultsTable" class="display" style="width:100%">
     <thead>
     <tr>
+        <th>Image</th>
         <th th:text="#{column.product}">Product</th>
         <th th:text="#{column.category}">Category</th>
         <th th:text="#{column.price}">Price</th>
@@ -56,6 +57,12 @@
 
     <tbody>
     <tr th:each="p : ${products}">
+        <td>
+            <img th:src="@{'/images/thumbs/' + ${p.productId} + '/' + ${p.featureImage} }"
+                 alt="Thumbnail"
+                 style="width:60px; height:auto; border-radius:4px;">
+        </td>
+
         <td>
             <a th:href="@{|/search/product/${p.productId}|}"
                th:text="${p.productName}"></a>
