@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Zelora</title>
+    <title th:text="#{title.home}">Zelora</title>
 </head>
 <body>
-<h1>Welcome to Zelora</h1>
-<a href="/search">Search Products</a>
+
+<h1 th:text="#{welcome.message}">Welcome to Zelora</h1>
+
+<a th:href="@{/search}" th:text="#{link.searchProducts}">Search Products</a>
+
+<hr>
+
+<!-- Language Switcher -->
+<a href="?lang=en">English</a> |
+<a href="?lang=fr">Français</a> |
+<a href="?lang=es">Español</a>
+
 </body>
 </html>

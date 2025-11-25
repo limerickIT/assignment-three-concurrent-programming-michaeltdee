@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title th:text="${product.productName}">Product Details</title>
+    <title th:text="#{title.product}">Product Details</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
 
-<a href="/search">⬅ Back to Search</a>
+<a href="/search" th:text="#{link.backToSearch}">Back to Search</a>
 
 <h1 th:text="${product.productName}"></h1>
 
 <div class="product-container">
 
-    <!-- LEFT SIDE: IMAGE -->
     <div class="product-image">
         <img th:src="@{'/images/' + ${product.featureImage}}"
              alt="Product Image"
              style="max-width:300px;">
     </div>
 
-    <!-- RIGHT SIDE: INFO -->
     <div class="product-info">
 
-        <p><strong>Category:</strong>
+        <p><strong th:text="#{label.category}">Category:</strong>
             <span th:text="${product.categoryId.categoryName}"></span>
         </p>
 
-        <p><strong>Description:</strong>
+        <p><strong th:text="#{label.description}">Description:</strong>
             <span th:text="${product.description}"></span>
         </p>
 
-        <p><strong>Price:</strong>
+        <p><strong th:text="#{label.price}">Price:</strong>
             €<span th:text="${product.price}"></span>
         </p>
 
         <p th:if="${product.discountedPrice != null}">
-            <strong>Discounted Price:</strong>
+            <strong th:text="#{label.discountedPrice}">Discounted Price:</strong>
             €<span th:text="${product.discountedPrice}"></span>
         </p>
 
-        <p><strong>Size:</strong> <span th:text="${product.size}"></span></p>
-        <p><strong>Colour:</strong> <span th:text="${product.colour}"></span></p>
-        <p><strong>Material:</strong> <span th:text="${product.material}"></span></p>
-        <p><strong>Sustainability Rating:</strong>
+        <p><strong th:text="#{label.size}">Size:</strong> <span th:text="${product.size}"></span></p>
+        <p><strong th:text="#{label.colour}">Colour:</strong> <span th:text="${product.colour}"></span></p>
+        <p><strong th:text="#{label.material}">Material:</strong> <span th:text="${product.material}"></span></p>
+
+        <p><strong th:text="#{label.sustainability}">Sustainability Rating:</strong>
             <span th:text="${product.sustainabilityRating}"></span>/5
         </p>
 
-        <p><strong>Manufacturer:</strong>
+        <p><strong th:text="#{label.manufacturer}">Manufacturer:</strong>
             <span th:text="${product.manufacturer}"></span>
         </p>
 
-        <p><strong>Release Date:</strong>
+        <p><strong th:text="#{label.releaseDate}">Release Date:</strong>
             <span th:text="${#dates.format(product.releaseDate, 'yyyy-MM-dd')}"></span>
         </p>
 
-        <p><strong>Supplier:</strong>
+        <p><strong th:text="#{label.supplier}">Supplier:</strong>
             <span th:text="${product.supplierId.supplierName}"></span>
         </p>
 
@@ -65,10 +65,10 @@
 <hr>
 
 <!-- REVIEWS -->
-<h2>Customer Reviews</h2>
+<h2 th:text="#{header.reviews}">Customer Reviews</h2>
 
 <div th:if="${product.reviewList.size() == 0}">
-    <p>No reviews yet.</p>
+    <p th:text="#{label.noReviews}">No reviews yet.</p>
 </div>
 
 <ul th:each="r : ${product.reviewList}">
@@ -80,17 +80,19 @@
 
 <hr>
 
-<!-- INVENTORY SECTION -->
-<h2>Inventory</h2>
+<!-- INVENTORY -->
+<h2 th:text="#{header.inventory}">Inventory</h2>
+
 <table>
     <thead>
     <tr>
-        <th>Inventory ID</th>
-        <th>In Stock</th>
-        <th>Reserved</th>
-        <th>Reorder Point</th>
+        <th th:text="#{column.inventoryId}">Inventory ID</th>
+        <th th:text="#{column.inStock}">In Stock</th>
+        <th th:text="#{column.reserved}">Reserved</th>
+        <th th:text="#{column.reorderPoint}">Reorder Point</th>
     </tr>
     </thead>
+
     <tbody>
     <tr th:each="i : ${product.inventoryList}">
         <td th:text="${i.inventoryId}"></td>
@@ -101,6 +103,12 @@
     </tbody>
 </table>
 
+<hr>
+
+<!-- Language Switcher -->
+<a href="?lang=en">English</a> |
+<a href="?lang=fr">Français</a> |
+<a href="?lang=es">Español</a>
 
 </body>
 </html>
