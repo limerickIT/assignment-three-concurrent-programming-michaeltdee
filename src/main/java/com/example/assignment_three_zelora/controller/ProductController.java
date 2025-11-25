@@ -60,7 +60,14 @@ public class ProductController {
         Product product = productService.getProductDetail(id);
         model.addAttribute("product", product);
 
+        List<String> extraImages =
+                productService.getAdditionalImages(id, product.getFeatureImage());
+
+        model.addAttribute("additionalImages", extraImages);
+
         return "product";
     }
+
+
 
 }

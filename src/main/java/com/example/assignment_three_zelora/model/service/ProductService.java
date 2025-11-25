@@ -4,6 +4,8 @@ import com.example.assignment_three_zelora.model.entitys.Product;
 import com.example.assignment_three_zelora.model.repos.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -105,5 +107,28 @@ public class ProductService {
                 recentDate
         );
     }
+
+    public List<String> getAdditionalImages(int productId, String featureImage) {
+        String basePath = "src/main/resources/static/images/large/" + productId + "/";
+        File folder = new File(basePath);
+
+        List<String> images = new ArrayList<>();
+
+        if (folder.exists() && folder.isDirectory()) {
+            for (File f : folder.listFiles()) {
+                String filename = f.getName();
+
+                // Ignore the feature image & only include real images
+                if (!filename.equals(featureImage)
+                        && (filename.endsWith(".png") || filename.endsWith(".jpg") || filename.endsWith(".jpeg"))) {
+                    images.add(filename);
+                }
+            }
+        }
+
+        return images;
+    }
+
+
 
 }
