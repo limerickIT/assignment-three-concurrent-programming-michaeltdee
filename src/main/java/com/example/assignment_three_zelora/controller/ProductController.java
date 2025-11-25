@@ -65,9 +65,10 @@ public class ProductController {
 
         model.addAttribute("additionalImages", extraImages);
 
+        Double avgRating = productService.getAverageRating(product);
+        model.addAttribute("avgRating", avgRating);
+
         return "product";
     }
-
-
 
 }

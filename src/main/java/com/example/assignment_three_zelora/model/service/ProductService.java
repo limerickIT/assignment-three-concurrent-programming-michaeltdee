@@ -129,6 +129,17 @@ public class ProductService {
         return images;
     }
 
+    public Double getAverageRating(Product product) {
+        if (product.getReviewList() == null || product.getReviewList().isEmpty()) {
+            return null; // No reviews
+        }
+
+        return product.getReviewList().stream()
+                .filter(r -> r.getRating() != null)
+                .mapToInt(r -> r.getRating())
+                .average()
+                .orElse(0.0);
+    }
 
 
 }

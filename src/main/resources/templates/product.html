@@ -95,20 +95,50 @@
 <hr>
 
 <!-- REVIEWS -->
+<hr>
+
 <h2 th:text="#{header.reviews}">Customer Reviews</h2>
+
+
+<!-- AVERAGE RATING -->
+<div th:if="${avgRating != null}">
+    <h3>
+        <span th:text="#{label.averageRating}">Average Rating:</span>
+        <strong th:text="${#numbers.formatDecimal(avgRating, 1, 1)}"></strong>/5
+    </h3>
+</div>
+
+<div th:if="${avgRating == null}">
+    <h3 th:text="#{label.noReviews}">No reviews yet.</h3>
+</div>
+
 
 <div th:if="${product.reviewList.size() == 0}">
     <p th:text="#{label.noReviews}">No reviews yet.</p>
 </div>
 
-<ul th:each="r : ${product.reviewList}">
-    <li>
-        <strong th:text="${r.rating}"></strong>/5 —
-        <span th:text="${r.reviewText}"></span>
+<ul class="review-list" th:each="r : ${product.reviewList}">
+    <li class="review-item">
+
+        <!-- Reviewer Name + Date -->
+        <p>
+            <strong th:text="${r.customerId.firstName}"></strong>
+            —
+            <span th:text="${#dates.format(r.reviewDate, 'yyyy-MM-dd')}"></span>
+        </p>
+
+        <!-- Rating -->
+        <p>
+            <strong th:text="${r.rating}"></strong>/5
+        </p>
+
+        <!-- Review text -->
+        <p th:text="${r.reviewText}"></p>
+
+        <hr>
     </li>
 </ul>
 
-<hr>
 
 <!-- INVENTORY -->
 <h2 th:text="#{header.inventory}">Inventory</h2>
