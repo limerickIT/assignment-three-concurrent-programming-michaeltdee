@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product Not Found</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<h1 th:text="#{error.productNotFound}">⚠ Product Not Found</h1>
+
+<p>
+    <span th:text="#{error.productNotFoundMessage}"></span>
+    <strong th:text="${missingId}"></strong>
+</p>
+
+
+<a href="/search">⬅ Back to Search</a>
+
+<hr>
+
+<!-- Language Switcher -->
+<a href="?lang=en">English</a> |
+<a href="?lang=fr">Français</a> |
+<a href="?lang=es">Español</a>
+
+</body>
+</html>

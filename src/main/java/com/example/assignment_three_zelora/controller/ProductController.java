@@ -59,6 +59,12 @@ public class ProductController {
     public String viewProduct(@PathVariable int id, Model model) {
 
         Product product = productService.getProductDetail(id);
+
+        //check if product exists
+        if (product == null) {
+            model.addAttribute("missingId", id);
+            return "error-product-not-found";
+        }
         model.addAttribute("product", product);
 
 
