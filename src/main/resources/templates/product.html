@@ -65,12 +65,12 @@
         </p>
 
         <p><strong th:text="#{label.price}">Price:</strong>
-            €<span th:text="${product.price}"></span>
+            <span th:text="${#numbers.formatCurrency(product.price)}"></span>
         </p>
 
         <p th:if="${product.discountedPrice != null}">
             <strong th:text="#{label.discountedPrice}">Discounted Price:</strong>
-            €<span th:text="${product.discountedPrice}"></span>
+            <span th:text="${#numbers.formatCurrency(product.discountedPrice)}"></span>
         </p>
 
         <p><strong th:text="#{label.size}">Size:</strong> <span th:text="${product.size}"></span></p>
@@ -172,8 +172,9 @@
 
 <!-- Language Switcher -->
 <a href="?lang=en">English</a> |
-<a href="?lang=fr">Français</a> |
-<a href="?lang=es">Español</a>
+<a href="?lang=fr_CA">Français (Canada)</a> |
+<a href="?lang=es_ES">Español (España)</a>
+
 
 
 <!-- More bootstrap linking -->

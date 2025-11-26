@@ -73,9 +73,9 @@
                th:text="${p.productName}"></a>
         </td>
         <td th:text="${p.categoryId.categoryName}"></td>
-        <td th:text="${p.price}"></td>
+        <td th:text="${#numbers.formatCurrency(p.price)}"></td>
         <td th:text="${#dates.format(p.releaseDate, 'yyyy-MM-dd')}"></td>
-        <td th:text="${p.discountedPrice != null ? p.discountedPrice : p.price}"></td>
+        <td th:text="${#numbers.formatCurrency(p.discountedPrice)}"></td>
     </tr>
     </tbody>
 </table>
@@ -111,9 +111,9 @@
 <hr>
 
 <!-- Language Switcher -->
-<a href="?lang=en">English</a> |
-<a href="?lang=fr">Français</a> |
-<a href="?lang=es">Español</a>
+<a href="?lang=en_IE">English</a> |
+<a href="?lang=fr_CA">Français (Canada)</a> |
+<a href="?lang=es_ES">Español (España)</a>
 
 </body>
 </html>
