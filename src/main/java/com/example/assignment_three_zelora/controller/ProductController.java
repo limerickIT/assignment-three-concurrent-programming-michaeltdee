@@ -22,7 +22,7 @@ public class ProductController {
     @GetMapping
     public String searchForm(Model model) {
 
-        // Load ALL products on first page load
+        // Fetches products from DB
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
 
@@ -60,11 +60,14 @@ public class ProductController {
         Product product = productService.getProductDetail(id);
         model.addAttribute("product", product);
 
+
+        //Checks for multiple images
         List<String> extraImages =
                 productService.getAdditionalImages(id, product.getFeatureImage());
 
         model.addAttribute("additionalImages", extraImages);
 
+        //Average rating method call
         Double avgRating = productService.getAverageRating(product);
         model.addAttribute("avgRating", avgRating);
 

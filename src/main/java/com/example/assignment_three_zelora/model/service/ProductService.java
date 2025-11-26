@@ -48,7 +48,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    //search method
+    //search method function
     public List<Product> searchProducts(String name,
                                         String category,
                                         Double minPrice,
@@ -76,7 +76,7 @@ public class ProductService {
     }
 
 
-    //product detail method
+    //Method for product drill down
     public Product getProductDetail(int id) {
         return productRepository.findProductDetail(id);
     }
@@ -129,6 +129,7 @@ public class ProductService {
         return images;
     }
 
+    //Method for getting avg review rating
     public Double getAverageRating(Product product) {
         if (product.getReviewList() == null || product.getReviewList().isEmpty()) {
             return null; // No reviews
