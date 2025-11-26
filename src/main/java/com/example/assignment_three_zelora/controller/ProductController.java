@@ -87,4 +87,14 @@ public class ProductController {
         return "product";
     }
 
+    @GetMapping("/compare")
+    public String compareProducts(@RequestParam("ids") List<Integer> ids, Model model) {
+
+        List<Product> products = productService.getProductsByIds(ids);
+        model.addAttribute("products", products);
+
+        return "compare";
+    }
+
+
 }

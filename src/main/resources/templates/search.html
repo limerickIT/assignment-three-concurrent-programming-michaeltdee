@@ -47,6 +47,7 @@
 <table id="resultsTable" class="display" style="width:100%">
     <thead>
     <tr>
+        <th>Select</th>
         <th>Image</th>
         <th th:text="#{column.product}">Product</th>
         <th th:text="#{column.category}">Category</th>
@@ -58,6 +59,9 @@
 
     <tbody>
     <tr th:each="p : ${products}">
+        <td>
+            <input type="checkbox" class="compare-checkbox" th:value="${p.productId}">
+        </td>
         <td>
             <img th:src="@{'/images/thumbs/' + ${p.productId} + '/' + ${p.featureImage} }"
                  alt="Thumbnail"
@@ -76,6 +80,7 @@
     </tbody>
 </table>
 
+<button id="compareBtn" type="button" th:text="#{button.compare}">Compare</button>
 <script>
     $(document).ready(function() {
         $('#resultsTable').DataTable({
@@ -86,6 +91,21 @@
             }
         });
     });
+
+    //JS to collect sellected ids
+    document.getElementById("compareBtn").addEventListener("click", function () {
+
+        const selected = [...document.querySelectorAll(".compare-checkbox:checked")]
+            .map(cb => cb.value);
+
+        if (selected.length < 2) {
+            alert("Please select at least two products to compare.");
+            return;
+        }
+
+        // Redirect to comparison page with selected IDs
+        window.location.href = "/search/compare?ids=" + selected.join(",");
+    })
 </script>
 
 <hr>

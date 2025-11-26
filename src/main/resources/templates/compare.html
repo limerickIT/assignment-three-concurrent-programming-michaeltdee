@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{title.compare}">Product Comparison</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+<a href="/search" th:text="#{link.backToSearch}">Back to Search</a>
+
+<h1 th:text="#{header.comparison}">Product Comparison</h1>
+
+<table class="comparison-table">
+    <thead>
+    <tr>
+        <th></th>
+        <th th:each="p : ${products}" th:text="${p.productName}"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <th th:text="#{column.price}"></th>
+        <td th:each="p : ${products}" th:text="${p.price}"></td>
+    </tr>
+
+    <tr>
+        <th th:text="#{column.discountedPrice}"></th>
+        <td th:each="p : ${products}"
+            th:text="${p.discountedPrice != null ? p.discountedPrice : p.price}">
+        </td>
+    </tr>
+
+    <tr>
+        <th th:text="#{column.material}"></th>
+        <td th:each="p : ${products}" th:text="${p.material}"></td>
+    </tr>
+
+    <tr>
+        <th th:text="#{column.colour}"></th>
+        <td th:each="p : ${products}" th:text="${p.colour}"></td>
+    </tr>
+
+    <tr>
+        <th th:text="#{column.sustainability}"></th>
+        <td th:each="p : ${products}" th:text="${p.sustainabilityRating}"></td>
+    </tr>
+
+    <tr>
+        <th th:text="#{column.category}"></th>
+        <td th:each="p : ${products}" th:text="${p.categoryId.categoryName}"></td>
+    </tr>
+
+    <tr>
+        <th th:text="#{column.manufacturer}"></th>
+        <td th:each="p : ${products}" th:text="${p.manufacturer}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

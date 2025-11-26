@@ -42,7 +42,7 @@ body {
    BUTTONS
 ------------------------------------------------- */
 button, .btn {
-    background: #0077cc;
+    background: green;
     color: white;
     border: none;
     padding: 10px 18px;
@@ -52,7 +52,7 @@ button, .btn {
 }
 
 button:hover, .btn:hover {
-    background: #005fa3;
+    background: green;
 }
 
 /* -------------------------------------------------
@@ -100,7 +100,7 @@ table {
 }
 
 table th {
-    background: #0077cc;
+    background: green;
     color: white;
     padding: 10px;
     text-align: left;
@@ -179,7 +179,7 @@ img.thumbnail {
 }
 
 .review-item strong {
-    color: #0077cc;
+    color: green;
 }
 
 /* -------------------------------------------------
@@ -198,4 +198,30 @@ img.thumbnail {
     .carousel-item img {
         max-height: 300px;
     }
+}
+
+/*
+Comparison styling
+ */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.comparison-table th,
+.comparison-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.comparison-table th {
+    background: green;
+    font-weight: bold;
+}
+
+.comparison-table tbody tr:nth-child(odd) {
+    background: #fafafa;
 }

@@ -154,6 +154,8 @@ public class ProductService {
                 .toList();
     }
 
-
+    public List<Product> getProductsByIds(List<Integer> ids) {
+        return productRepository.findAllById(ids);
+    }
 
 }
