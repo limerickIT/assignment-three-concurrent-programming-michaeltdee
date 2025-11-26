@@ -1,6 +1,7 @@
 package com.example.assignment_three_zelora.model.service;
 
 import com.example.assignment_three_zelora.model.entitys.Product;
+import com.example.assignment_three_zelora.model.entitys.Review;
 import com.example.assignment_three_zelora.model.repos.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -141,6 +142,18 @@ public class ProductService {
                 .average()
                 .orElse(0.0);
     }
+
+    public List<Review> getFilteredReviews(Product product) {
+        if (product.getReviewList() == null) {
+            return List.of();
+        }
+
+        return product.getReviewList()
+                .stream()
+                .filter(r -> r.getRating() != null && r.getRating() >= 3)
+                .toList();
+    }
+
 
 
 }

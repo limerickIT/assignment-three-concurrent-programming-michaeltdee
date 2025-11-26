@@ -1,5 +1,6 @@
 package com.example.assignment_three_zelora.controller;
 
+import com.example.assignment_three_zelora.model.entitys.Review;
 import org.springframework.ui.Model;
 import com.example.assignment_three_zelora.model.entitys.Product;
 import com.example.assignment_three_zelora.model.service.ProductService;
@@ -65,11 +66,23 @@ public class ProductController {
         List<String> extraImages =
                 productService.getAdditionalImages(id, product.getFeatureImage());
 
+
+        List<Review> filteredReviews = productService.getFilteredReviews(product);
+        model.addAttribute("filteredReviews", filteredReviews);
+
+        model.addAttribute("product", product);
+
         model.addAttribute("additionalImages", extraImages);
 
         //Average rating method call
         Double avgRating = productService.getAverageRating(product);
         model.addAttribute("avgRating", avgRating);
+
+        int totalReviews = product.getReviewList() != null
+                ? product.getReviewList().size()
+                : 0;
+
+        model.addAttribute("totalReviews", totalReviews);
 
         return "product";
     }

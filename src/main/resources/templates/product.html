@@ -108,7 +108,8 @@
 <div th:if="${avgRating != null}">
     <h3>
         <span th:text="#{label.averageRating}">Average Rating:</span>
-        <strong th:text="${#numbers.formatDecimal(avgRating, 1, 1)}"></strong>/5
+        <strong th:text="${#numbers.formatDecimal(avgRating, 1, 1)}"></strong>/5 of
+        <span th:text="#{label.outOfReviews(${totalReviews})}"></span>
     </h3>
 </div>
 
@@ -121,15 +122,18 @@
     <p th:text="#{label.noReviews}">No reviews yet.</p>
 </div>
 
-<ul class="review-list" th:each="r : ${product.reviewList}">
-    <li class="review-item">
 
+<!-- Filter reviews to show only those 3 and above-->
+<ul class="review-list" th:each="r : ${filteredReviews}">
+    <li class="review-item">
         <p>
             <strong th:text="${r.customerId.firstName}"></strong>
             —
             <span th:text="${#dates.format(r.reviewDate, 'yyyy-MM-dd')}"></span>
         </p>
-
+        <p>
+            <span th:text="${r.customerId.city}"></span>
+        </p>
         <p>
             <strong th:text="${r.rating}"></strong>/5
         </p>
